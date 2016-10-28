@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
   std::cout << "* in_addr  : " << in_addr << std::endl;
   std::cout << "* in_port  : " << in_port << std::endl;
   std::cout << "* out_addr : " << out_addr << std::endl;
-  std::cout << "* out_port : " << in_port << std::endl;
+  std::cout << "* out_port : " << out_port << std::endl;
   std::cout << "**************************" << std::endl;
 
   // Server connection set up
