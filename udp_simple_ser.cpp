@@ -27,6 +27,8 @@ along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 
 int main(int argc, char** argv){
   std::string loc_addr, loc_port, rem_addr, rem_port;
+
+  // Command line handling
   if (argc == 5) {
     loc_addr = argv[1];
     loc_port = argv[2];
@@ -51,6 +53,7 @@ int main(int argc, char** argv){
   std::cout << "**** BOOST UDP SERVER ****" << std::endl;
   std::cout << "**************************" << std::endl;
 
+  // Server set up
   boost::asio::io_service ioService;
   UDPConnection udp_con(ioService, loc_addr, loc_port, rem_addr, rem_port );
 
@@ -77,6 +80,11 @@ int main(int argc, char** argv){
     if (hash == std::string(md5string)) {
       std::cout << "Hash match! Sending ACK to client" << std::endl;
       udp_con.send(std::to_string(udp_con.len_recv));
+    }
+
+    if (text == "REMOTE_SHUTDOWN") {
+      std::cout << "Server remotely closed." << std::endl;
+      break;
     }
   }
 

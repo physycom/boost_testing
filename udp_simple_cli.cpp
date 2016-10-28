@@ -26,6 +26,8 @@ along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 
 int main(int argc, char** argv) {
   std::string loc_addr, loc_port, rem_addr, rem_port;
+
+  // Command line handling
   if ( argc == 5 ) {
     loc_addr = argv[3];
     loc_port = argv[4];
@@ -50,6 +52,7 @@ int main(int argc, char** argv) {
   std::cout << "**** BOOST UDP CLIENT ****" << std::endl;
   std::cout << "**************************" << std::endl;
 
+  // Client set up
   boost::asio::io_service ioService;
   UDPConnection udp_con(ioService, loc_addr, loc_port, rem_addr, rem_port);
 
@@ -60,7 +63,7 @@ int main(int argc, char** argv) {
 
   for (;;) {
     // wait for user message
-    std::cout << std::endl << "Type your message or hit Ctrl-C to quit: ";
+    std::cout << std::endl << "Type your message or hit Ctrl-C to quit : ";
     std::getline(std::cin, text);
 
     // evaluate MD5hash and prepare message 
