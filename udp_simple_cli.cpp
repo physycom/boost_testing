@@ -22,7 +22,8 @@ along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 #include "udp_lib.hpp"
 #include "md5.h"
 
-#define CLIENT_ID         0x0101
+constexpr int CLIENT_ID = 0x0101;
+constexpr char SEPARATOR[] = ";";
 
 int main(int argc, char** argv) {
   std::string in_addr, in_port, out_addr, out_port;
@@ -73,7 +74,7 @@ int main(int argc, char** argv) {
 
     // evaluate MD5hash and prepare message 
     std::string md5string = make_md5hash(text);
-    message = std::to_string(CLIENT_ID) + ":" + text + ":" + md5string;
+    message = std::to_string(CLIENT_ID) + SEPARATOR + text + SEPARATOR + md5string;
     std::cout << "Text : \"" << text << "\"" << std::endl;
     std::cout << "Hash : \"" << md5string << "\"" << std::endl;
     std::cout << "Msg  : \"" << message << "\"" << std::endl;

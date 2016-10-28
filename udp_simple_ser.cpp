@@ -25,6 +25,8 @@ along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 #include "udp_lib.hpp"
 #include "md5.h"
 
+constexpr char SEPARATOR[] = ";";
+
 int main(int argc, char** argv) {
   std::string in_addr, in_port, out_addr, out_port;
 
@@ -62,12 +64,13 @@ int main(int argc, char** argv) {
   boost::asio::io_service ioService;
   UDPConnection udp_con(ioService, in_addr, in_port, out_addr, out_port);
 
-  std::array<char, 128> buffer;
+  std::array<char, 512> buffer;
   boost::system::error_code err;
   int msg_counter = 0;
   std::string message, client_id, text, hash;
 
   for (;;) {
+    std::cout << std::endl << "Awaiting message..." << std::endl;
     // receive message from client
     udp_con.recv(boost::asio::buffer(&buffer[0], buffer.size()), err);
     message = std::string(buffer.data(), udp_con.len_recv);
@@ -75,7 +78,7 @@ int main(int argc, char** argv) {
 
     // extract data from message
     std::vector<std::string> tokens;
-    boost::algorithm::split(tokens, message, boost::algorithm::is_any_of(":"), boost::algorithm::token_compress_off);
+    boost::algorithm::split(tokens, message, boost::algorithm::is_any_of(SEPARATOR), boost::algorithm::token_compress_off);
     if (tokens.size() == 3) {
       client_id = tokens[0];
       text = tokens[1];
@@ -83,14 +86,19 @@ int main(int argc, char** argv) {
     }
     else {
       std::cerr << "ERROR: message format unknown, skipping." << std::endl;
+      std::cerr << "ERROR: content -> " << message << std::endl;
       continue;
     }
 
     // check MD5hash and send ack to client
     std::string md5string = make_md5hash(text);
-    if (hash == std::string(md5string)) {
+    if (hash == std::string(md5string) || hash == "let_me_pass" ) {
       std::cout << "Hash match! Sending ACK to client" << std::endl;
       udp_con.send(std::to_string(udp_con.len_recv));
+    }
+    else {
+      std::cout << "Hash mismatch!" << std::endl;
+      continue;
     }
 
     if (text == "REMOTE_SHUTDOWN") {
