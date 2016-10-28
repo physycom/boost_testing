@@ -25,37 +25,42 @@ along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 #include "udp_lib.hpp"
 #include "md5.h"
 
-int main(int argc, char** argv){
-  std::string loc_addr, loc_port, rem_addr, rem_port;
+int main(int argc, char** argv) {
+  std::string in_addr, in_port, out_addr, out_port;
 
   // Command line handling
   if (argc == 5) {
-    loc_addr = argv[1];
-    loc_port = argv[2];
-    rem_addr = argv[3];
-    rem_port = argv[4];
+    in_addr = argv[1];
+    in_port = argv[2];
+    out_addr = argv[3];
+    out_port = argv[4];
   }
   else if (argc == 2 && std::string(argv[1]) == "def") {
-    loc_addr = "127.0.0.1";
-    loc_port = "11111";
-    rem_addr = "127.0.0.1";
-    rem_port = "22222";
+    in_addr = "127.0.0.1";
+    in_port = "11111";
+    out_addr = "127.0.0.1";
+    out_port = "22222";
   }
   else {
-    std::cout << "Usage: " << argv[0] << " local_addr local_port remote_addr remote_port" << std::endl;
-    std::cout << "       " << " Set up UDP server listening on local_addr:local_port and sending ACK message to remote_addr:remote_port" << std::endl;
+    std::cout << "Usage: " << argv[0] << " in_addr in_port out_addr out_port" << std::endl;
+    std::cout << "       " << " Set up UDP server listening on in_addr:in_port and sending ACK message to out_addr:out_port" << std::endl;
     std::cout << "Usage: " << " def" << std::endl;
-    std::cout << "       " << " Set up UDP server listening on 127.0.0.1:11111 and sending ACK message to 127.0.0.1:22222" << std::endl;
+    std::cout << "       " << " Set up default UDP server (listen 127.0.0.1:11111, send ACK 127.0.0.1:22222)" << std::endl;
     exit(1);
   }
 
   std::cout << "**************************" << std::endl;
   std::cout << "**** BOOST UDP SERVER ****" << std::endl;
   std::cout << "**************************" << std::endl;
+  std::cout << "* in_addr  : " << in_addr << std::endl;
+  std::cout << "* in_port  : " << in_port << std::endl;
+  std::cout << "* out_addr : " << out_addr << std::endl;
+  std::cout << "* out_port : " << in_port << std::endl;
+  std::cout << "**************************" << std::endl;
 
-  // Server set up
+  // Server connection set up
   boost::asio::io_service ioService;
-  UDPConnection udp_con(ioService, loc_addr, loc_port, rem_addr, rem_port );
+  UDPConnection udp_con(ioService, in_addr, in_port, out_addr, out_port);
 
   std::array<char, 128> buffer;
   boost::system::error_code err;
@@ -71,9 +76,15 @@ int main(int argc, char** argv){
     // extract data from message
     std::vector<std::string> tokens;
     boost::algorithm::split(tokens, message, boost::algorithm::is_any_of(":"), boost::algorithm::token_compress_off);
-    client_id = tokens[0];
-    text = tokens[1];
-    hash = tokens[2];
+    if (tokens.size() == 3) {
+      client_id = tokens[0];
+      text = tokens[1];
+      hash = tokens[2];
+    }
+    else {
+      std::cerr << "ERROR: message format unknown, skipping." << std::endl;
+      continue;
+    }
 
     // check MD5hash and send ack to client
     std::string md5string = make_md5hash(text);

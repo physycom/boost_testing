@@ -25,36 +25,41 @@ along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 #define CLIENT_ID         0x0101
 
 int main(int argc, char** argv) {
-  std::string loc_addr, loc_port, rem_addr, rem_port;
+  std::string in_addr, in_port, out_addr, out_port;
 
   // Command line handling
-  if ( argc == 5 ) {
-    loc_addr = argv[3];
-    loc_port = argv[4];
-    rem_addr = argv[1];
-    rem_port = argv[2];
+  if (argc == 5) {
+    in_addr = argv[1];
+    in_port = argv[2];
+    out_addr = argv[3];
+    out_port = argv[4];
   }
-  else if (argc == 2 && std::string(argv[1]) == "def" ) {
-    loc_addr = "127.0.0.1";
-    loc_port = "22222";
-    rem_addr = "127.0.0.1";
-    rem_port = "11111";
+  else if (argc == 2 && std::string(argv[1]) == "def") {
+    in_addr = "127.0.0.1";
+    in_port = "22222";
+    out_addr = "127.0.0.1";
+    out_port = "11111";
   }
   else {
-    std::cout << "Usage: " << argv[0] << " local_addr local_port remote_addr remote_port" << std::endl;
-    std::cout << "       " << " Set up UDP server listening on local_addr:local_port and sending ACK message to remote_addr:remote_port" << std::endl;
+    std::cout << "Usage: " << argv[0] << " in_addr in_port out_addr out_port" << std::endl;
+    std::cout << "       " << " Set up UDP client sending text to out_addr:out_port and listen for ACK message to in_addr:in_port" << std::endl;
     std::cout << "Usage: " << " def" << std::endl;
-    std::cout << "       " << " Set up UDP client sending messages on 127.0.0.1:11111 and receiving ACK message to 127.0.0.1:22222" << std::endl;
+    std::cout << "       " << " Set up default UDP client (send 127.0.0.1:11111, listen ACK 127.0.0.1:22222)" << std::endl;
     exit(1);
   }
-  
+
   std::cout << "**************************" << std::endl;
   std::cout << "**** BOOST UDP CLIENT ****" << std::endl;
   std::cout << "**************************" << std::endl;
+  std::cout << "* in_addr  : " << in_addr << std::endl;
+  std::cout << "* in_port  : " << in_port << std::endl;
+  std::cout << "* out_addr : " << out_addr << std::endl;
+  std::cout << "* out_port : " << in_port << std::endl;
+  std::cout << "**************************" << std::endl;
 
-  // Client set up
+  // Client connection set up
   boost::asio::io_service ioService;
-  UDPConnection udp_con(ioService, loc_addr, loc_port, rem_addr, rem_port);
+  UDPConnection udp_con(ioService, in_addr, in_port, out_addr, out_port);
 
   std::string message, text;
   size_t msg_counter = 0;
