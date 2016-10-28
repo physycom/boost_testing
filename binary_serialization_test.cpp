@@ -19,6 +19,7 @@ along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 
 #define _CRT_SECURE_NO_WARNINGS
 
+#include <iostream>
 #include <fstream>
 
 #include <boost/archive/binary_iarchive.hpp>

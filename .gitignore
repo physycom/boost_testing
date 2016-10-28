@@ -227,3 +227,4 @@ output*/
 *.mxp
 /rdp/conf.json
 *.json
+*.db

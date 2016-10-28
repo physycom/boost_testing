@@ -25,10 +25,34 @@ along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 #include "udp_lib.hpp"
 #include "md5.h"
 
-int main(){
+int main(int argc, char** argv){
+  std::string loc_addr, loc_port, rem_addr, rem_port;
+  if (argc == 5) {
+    loc_addr = argv[1];
+    loc_port = argv[2];
+    rem_addr = argv[3];
+    rem_port = argv[4];
+  }
+  else if (argc == 2 && std::string(argv[1]) == "def") {
+    loc_addr = "127.0.0.1";
+    loc_port = "11111";
+    rem_addr = "127.0.0.1";
+    rem_port = "22222";
+  }
+  else {
+    std::cout << "Usage: " << argv[0] << " local_addr local_port remote_addr remote_port" << std::endl;
+    std::cout << "       " << " Set up UDP server listening on local_addr:local_port and sending ACK message to remote_addr:remote_port" << std::endl;
+    std::cout << "Usage: " << " def" << std::endl;
+    std::cout << "       " << " Set up UDP server listening on 127.0.0.1:11111 and sending ACK message to 127.0.0.1:22222" << std::endl;
+    exit(1);
+  }
+
+  std::cout << "**************************" << std::endl;
+  std::cout << "**** BOOST UDP SERVER ****" << std::endl;
+  std::cout << "**************************" << std::endl;
+
   boost::asio::io_service ioService;
-  UDPConnection udp_con(ioService, "localhost", "12345", "localhost", "54321");
-  std::cout << "Awaiting connections..." << std::endl << std::endl;
+  UDPConnection udp_con(ioService, loc_addr, loc_port, rem_addr, rem_port );
 
   std::array<char, 128> buffer;
   boost::system::error_code err;
@@ -43,7 +67,7 @@ int main(){
 
     // extract data from message
     std::vector<std::string> tokens;
-    boost::algorithm::split(tokens, message, boost::algorithm::is_any_of(":"), boost::algorithm::token_compress_on);
+    boost::algorithm::split(tokens, message, boost::algorithm::is_any_of(":"), boost::algorithm::token_compress_off);
     client_id = tokens[0];
     text = tokens[1];
     hash = tokens[2];

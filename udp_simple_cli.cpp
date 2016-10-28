@@ -24,9 +24,34 @@ along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 
 #define CLIENT_ID         0x0101
 
-int main() {
+int main(int argc, char** argv) {
+  std::string loc_addr, loc_port, rem_addr, rem_port;
+  if ( argc == 5 ) {
+    loc_addr = argv[3];
+    loc_port = argv[4];
+    rem_addr = argv[1];
+    rem_port = argv[2];
+  }
+  else if (argc == 2 && std::string(argv[1]) == "def" ) {
+    loc_addr = "127.0.0.1";
+    loc_port = "22222";
+    rem_addr = "127.0.0.1";
+    rem_port = "11111";
+  }
+  else {
+    std::cout << "Usage: " << argv[0] << " local_addr local_port remote_addr remote_port" << std::endl;
+    std::cout << "       " << " Set up UDP server listening on local_addr:local_port and sending ACK message to remote_addr:remote_port" << std::endl;
+    std::cout << "Usage: " << " def" << std::endl;
+    std::cout << "       " << " Set up UDP client sending messages on 127.0.0.1:11111 and receiving ACK message to 127.0.0.1:22222" << std::endl;
+    exit(1);
+  }
+  
+  std::cout << "**************************" << std::endl;
+  std::cout << "**** BOOST UDP CLIENT ****" << std::endl;
+  std::cout << "**************************" << std::endl;
+
   boost::asio::io_service ioService;
-  UDPConnection udp_con(ioService, "localhost", "54321", "localhost", "12345");
+  UDPConnection udp_con(ioService, loc_addr, loc_port, rem_addr, rem_port);
 
   std::string message, text;
   size_t msg_counter = 0;
