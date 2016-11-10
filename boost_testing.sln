@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "text_serialization", "text_serialization\text_serialization.vcxproj", "{71A0D0C9-13F6-45A8-8C0F-46E7D79D6F8F}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "udp_server", "udp_server\udp_server.vcxproj", "{822F13F7-30B3-496E-8E57-6AB0D1AE0AF2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "udp_client", "udp_client\udp_client.vcxproj", "{EF45B79B-C53F-49B6-8CF9-CE51FA1E0E74}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "parser_json", "parser_json\parser_json.vcxproj", "{FAC8B5CA-E30A-43B3-9742-0DF144AE8669}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "parser_xml", "parser_xml\parser_xml.vcxproj", "{EE67EFDA-823C-4719-8AAB-44B420F635D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,22 @@ Global
 		{EF45B79B-C53F-49B6-8CF9-CE51FA1E0E74}.Release|x64.Build.0 = Release|x64
 		{EF45B79B-C53F-49B6-8CF9-CE51FA1E0E74}.Release|x86.ActiveCfg = Release|Win32
 		{EF45B79B-C53F-49B6-8CF9-CE51FA1E0E74}.Release|x86.Build.0 = Release|Win32
+		{FAC8B5CA-E30A-43B3-9742-0DF144AE8669}.Debug|x64.ActiveCfg = Debug|x64
+		{FAC8B5CA-E30A-43B3-9742-0DF144AE8669}.Debug|x64.Build.0 = Debug|x64
+		{FAC8B5CA-E30A-43B3-9742-0DF144AE8669}.Debug|x86.ActiveCfg = Debug|Win32
+		{FAC8B5CA-E30A-43B3-9742-0DF144AE8669}.Debug|x86.Build.0 = Debug|Win32
+		{FAC8B5CA-E30A-43B3-9742-0DF144AE8669}.Release|x64.ActiveCfg = Release|x64
+		{FAC8B5CA-E30A-43B3-9742-0DF144AE8669}.Release|x64.Build.0 = Release|x64
+		{FAC8B5CA-E30A-43B3-9742-0DF144AE8669}.Release|x86.ActiveCfg = Release|Win32
+		{FAC8B5CA-E30A-43B3-9742-0DF144AE8669}.Release|x86.Build.0 = Release|Win32
+		{EE67EFDA-823C-4719-8AAB-44B420F635D8}.Debug|x64.ActiveCfg = Debug|x64
+		{EE67EFDA-823C-4719-8AAB-44B420F635D8}.Debug|x64.Build.0 = Debug|x64
+		{EE67EFDA-823C-4719-8AAB-44B420F635D8}.Debug|x86.ActiveCfg = Debug|Win32
+		{EE67EFDA-823C-4719-8AAB-44B420F635D8}.Debug|x86.Build.0 = Debug|Win32
+		{EE67EFDA-823C-4719-8AAB-44B420F635D8}.Release|x64.ActiveCfg = Release|x64
+		{EE67EFDA-823C-4719-8AAB-44B420F635D8}.Release|x64.Build.0 = Release|x64
+		{EE67EFDA-823C-4719-8AAB-44B420F635D8}.Release|x86.ActiveCfg = Release|Win32
+		{EE67EFDA-823C-4719-8AAB-44B420F635D8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
