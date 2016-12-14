@@ -56,6 +56,7 @@ int main() {
     boost::archive::binary_oarchive oa(ss);
     oa << b;
   }
+  cout << "BOUNDARY (raw)" << endl << ss.str() << endl;
 
   {
     boost::archive::binary_iarchive ia(ss);
