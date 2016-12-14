@@ -228,3 +228,4 @@ output*/
 /rdp/conf.json
 *.json
 *.db
+*.bin
