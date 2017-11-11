@@ -17,9 +17,6 @@ You should have received a copy of the GNU General Public License
 along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 ***************************************************************************/
 
-#define _SCL_SECURE_NO_WARNINGS
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <boost/algorithm/string.hpp>
 
 #include "udp_lib.hpp"

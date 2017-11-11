@@ -17,8 +17,6 @@ You should have received a copy of the GNU General Public License
 along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 ***************************************************************************/
 
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <iostream>
 #include <fstream>
 #include <sstream>

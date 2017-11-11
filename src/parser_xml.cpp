@@ -20,10 +20,6 @@ along with boost_testing. If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <sstream>
 
-#ifdef _MSC_VER
-#pragma warning(disable:4503)           // "decorated name length exceeded" warning
-#endif
-
 #include <boost/exception/all.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>

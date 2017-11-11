@@ -17,6 +17,7 @@ endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
 if (MSVC)
   add_definitions(-D_SCL_SECURE_NO_WARNINGS)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+  add_definitions(-D_WIN32_WINNT=0x0501)
 endif()
 
 if(UNIX AND NOT APPLE)
