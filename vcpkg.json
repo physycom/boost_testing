@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+  "name": "boost-testing",
+  "version": "1.0.0",
+  "homepage": "https://github.com/physycom/boost_testing",
+  "description": "set of minimal example of the Boost libraries adapted to our needs",
+  "dependencies": [
+    "boost-asio",
+    "boost-date-time",
+    "boost-filesystem",
+    "boost-regex",
+    "boost-serialization",
+    "boost-system"
+  ]
+}
