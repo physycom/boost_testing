@@ -47,7 +47,7 @@ endif()
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
-find_package(Boost COMPONENTS regex system filesystem date_time serialization REQUIRED)
+find_package(Boost COMPONENTS date_time filesystem regex serialization system REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIR})
 

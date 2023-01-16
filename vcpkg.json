@@ -8,6 +8,7 @@
     "boost-asio",
     "boost-date-time",
     "boost-filesystem",
+    "boost-property-tree",
     "boost-regex",
     "boost-serialization",
     "boost-system"
